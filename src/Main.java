@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
+
         ArrayList<AbstractExpression> expressoes = new ArrayList<>();
 
-        Context context = new Context(new Date());
-        context.formato = "DD-MM-YYYY";
+        String formato = "DD-MM-YYYY";
+        Context context = new Context(new Date(), formato);
 
         String[] partes = context.formato.split("-");
 
@@ -24,14 +25,14 @@ public class Main {
             expressoes.add(new SeparatorExpression());
         }
 
-        // remove o último separador extra
-        expressoes.remove(expressoes.size() - 1);
+        //Remover ultimo separador
+        expressoes.removeLast();
 
         for (AbstractExpression expression : expressoes) {
             expression.interpret(context);
         }
 
-        System.out.println(context.formato);
+        System.out.println(context.resultado);
 
     }
 }
